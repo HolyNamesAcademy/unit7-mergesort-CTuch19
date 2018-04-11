@@ -14,7 +14,23 @@ public class Main {
      * @param arrayList the ArrayList to be sorted. arrayList cannot contain duplicates
      */
     public static void selectionSort(ArrayList<Integer> arrayList) {
-        throw new UnsupportedOperationException("SelectionSort() has not been implemented yet");
+        for(int i = 0; i< arrayList.size(); i++)
+        {
+            int min = arrayList.get(i);
+            int minIndex = i;
+            for(int j = i+1; j<arrayList.size(); j++)
+            {
+                if(arrayList.get(j)<min)
+                {
+                    min = arrayList.get(j);
+                    minIndex = j;
+                }
+            }
+            arrayList.set(minIndex, arrayList.get(i));
+            arrayList.set(i, min);
+
+
+        }
     }
 
     /**
@@ -24,7 +40,14 @@ public class Main {
      * @param value the value we are looking for in the array list
      */
     public static int linearSearch(ArrayList<Integer> arrayList, int value) {
-        throw new UnsupportedOperationException("LinearSearch() has not been implemented yet");
+        for(int i = 0; i< arrayList.size(); i++)
+        {
+            if(arrayList.get(i) == value)
+            {
+                return i;
+            }
+        }
+        return -1;
     }
 
     /**
@@ -35,7 +58,18 @@ public class Main {
      * @param value the value we are looking for in the array list
      */
     public static int binarySearch(ArrayList<Integer> arrayList, int value) {
-        throw new UnsupportedOperationException("LinearSearch() has not been implemented yet");
+        int minIndex = 0;
+        int maxIndex = arrayList.size()-1;
+        while(true) {
+            int curIndex = (maxIndex + minIndex) / 2;
+            if (arrayList.get(curIndex) == value) {
+                return curIndex;
+            } else if (arrayList.get(curIndex) > value) {
+                maxIndex = curIndex;
+            } else {
+                minIndex = curIndex;
+            }
+        }
     }
 
     /**
@@ -57,7 +91,10 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        throw new UnsupportedOperationException("sort() has not been implemented yet");
+        //if(.size() == 1 || .size() == 0)
+        //{
+            return;
+        //}
     }
 
     /**
@@ -71,6 +108,31 @@ public class Main {
      * @param hi the index of the last element in the second range + 1.
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
-        throw new UnsupportedOperationException("merge() has not been implemented yet");
+        ArrayList<Integer> temp = new ArrayList<>();
+        for(int i = 0; i< hi; i++) {
+            if (lo >= mid) {
+                for (int j = mid; j < hi; j++) {
+                    temp.add(arrayList.get(j));
+                }
+                arrayList = temp;
+                return;
+            } else if (mid >= hi) {
+                for (int k = lo; k < mid; k++) {
+                    temp.add(arrayList.get(k));
+                }
+                arrayList = temp;
+                return;
+            } else {
+                if (arrayList.get(lo) <= arrayList.get(mid)) {
+                    temp.add(arrayList.get(lo));
+                    lo++;
+                } else {
+                    temp.add(arrayList.get(mid));
+                    mid++;
+                }
+            }
+        }
+        arrayList = temp;
+        return;
     }
 }
