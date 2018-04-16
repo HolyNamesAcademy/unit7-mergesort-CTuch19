@@ -109,30 +109,36 @@ public class Main {
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
         ArrayList<Integer> temp = new ArrayList<>();
+        int origlo = lo;
         for(int i = 0; i< hi; i++) {
             if (lo >= mid) {
                 for (int j = mid; j < hi; j++) {
                     temp.add(arrayList.get(j));
+                    arrayList.remove(arrayList.get(j));
                 }
-                arrayList = temp;
+                arrayList.addAll(origlo, temp);
                 return;
             } else if (mid >= hi) {
                 for (int k = lo; k < mid; k++) {
                     temp.add(arrayList.get(k));
+                    arrayList.remove(arrayList.get(k));
                 }
-                arrayList = temp;
+                arrayList.addAll(origlo, temp);
                 return;
             } else {
                 if (arrayList.get(lo) <= arrayList.get(mid)) {
                     temp.add(arrayList.get(lo));
-                    lo++;
+                    arrayList.remove(arrayList.get(lo));
+                    mid--;
+
                 } else {
                     temp.add(arrayList.get(mid));
-                    mid++;
+                    arrayList.remove(arrayList.get(mid));
+
                 }
             }
         }
-        arrayList = temp;
+        arrayList.addAll(origlo, temp);
         return;
     }
 }
