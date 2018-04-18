@@ -78,7 +78,7 @@ public class Main {
      * @param arrayList the ArrayList to be sorted. arrayList cannot contain duplicates
      */
     public static void mergeSort(ArrayList<Integer> arrayList) {
-        throw new UnsupportedOperationException("mergeSort() has not been implemented yet");
+        sort(arrayList, 0, arrayList.size());
     }
 
     /**
@@ -91,10 +91,17 @@ public class Main {
      * @param hi the index of the last element in the range + 1.
      */
     public static void sort(ArrayList<Integer> arrayList, int lo, int hi) {
-        //if(.size() == 1 || .size() == 0)
-        //{
+        if(hi == lo || hi - lo == 1)
+        {
             return;
-        //}
+        }
+        else
+        {
+            int mid = (hi+lo)/2;
+            sort(arrayList, lo, mid);
+            sort(arrayList, mid, hi);
+            merge(arrayList, lo, mid, hi);
+        }
     }
 
     /**
@@ -109,21 +116,21 @@ public class Main {
      */
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
         ArrayList<Integer> temp = new ArrayList<>();
-        int origlo = lo;
-        for(int i = 0; i< hi; i++) {
+
+        for(int i = 0; i< hi-1; i++) {
             if (lo >= mid) {
                 for (int j = mid; j < hi; j++) {
-                    temp.add(arrayList.get(j));
-                    arrayList.remove(arrayList.get(j));
+                    temp.add(arrayList.get(mid));
+                    arrayList.remove(arrayList.get(mid));
                 }
-                arrayList.addAll(origlo, temp);
+                arrayList.addAll(lo, temp);
                 return;
-            } else if (mid >= hi) {
+            }else if (mid == arrayList.size()) {
                 for (int k = lo; k < mid; k++) {
-                    temp.add(arrayList.get(k));
-                    arrayList.remove(arrayList.get(k));
+                    temp.add(arrayList.get(lo));
+                    arrayList.remove(arrayList.get(lo));
                 }
-                arrayList.addAll(origlo, temp);
+                arrayList.addAll(lo, temp);
                 return;
             } else {
                 if (arrayList.get(lo) <= arrayList.get(mid)) {
@@ -138,7 +145,7 @@ public class Main {
                 }
             }
         }
-        arrayList.addAll(origlo, temp);
+        arrayList.addAll(lo, temp);
         return;
     }
 }
