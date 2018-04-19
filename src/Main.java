@@ -117,7 +117,7 @@ public class Main {
     public static void merge(ArrayList<Integer> arrayList, int lo, int mid, int hi) {
         ArrayList<Integer> temp = new ArrayList<>();
 
-        for(int i = 0; i< hi-1; i++) {
+        /*for(int i = 0; i< hi-1; i++) {
             if (lo >= mid) {
                 for (int j = mid; j < hi; j++) {
                     temp.add(arrayList.get(mid));
@@ -146,6 +146,38 @@ public class Main {
             }
         }
         arrayList.addAll(lo, temp);
-        return;
+        return;*/
+        int low = lo;
+        int middle = mid;
+        while( low < mid || middle < hi)
+        {
+            if(middle == hi)
+            {
+                temp.add(arrayList.get(low));
+                low++;
+            }
+            else if(low == mid)
+            {
+                temp.add(arrayList.get(middle));
+                middle++;
+            }
+            else if(arrayList.get(low)>arrayList.get(middle))
+            {
+                temp.add(arrayList.get(middle));
+                middle++;
+
+            }
+            else
+            {
+                temp.add(arrayList.get(low));
+                low++;
+            }
+        }
+
+        for(int i = 0; i< temp.size(); i++)
+        {
+            arrayList.set(i + lo, temp.get(i));
+
+        }
     }
 }
